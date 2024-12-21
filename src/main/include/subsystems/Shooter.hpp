@@ -16,6 +16,15 @@ class Shooter : public frc2::SubsystemBase
 {
 public:
     Shooter();
+    void Intake();
+    void FeedShooter();
+    void RampShooter();
+    void StopIntake();
+    void StopShooter();
+    bool HasPiece();
+    frc2::CommandPtr&& GetIntakeCommand();
+    frc2::CommandPtr&& GetShootCommand();
+    frc2::CommandPtr&& GetDefaultCommand();
 private:
     frc::PWMTalonSRX shooter, indexer;
     frc::DigitalInput beambreak;

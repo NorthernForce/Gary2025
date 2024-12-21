@@ -23,6 +23,9 @@ void GaryContainer::ConfigureBindings()
     m_drive.SetDefaultCommand(m_drive.GetDefaultCommand(
         TuneJoystickInput([&driverController]() { return -driverController.GetLeftY(); }),
         TuneJoystickInput([&driverController]() { return -driverController.GetRightX(); })));
+    driverController.LeftTrigger().WhileTrue(m_shooter.GetIntakeCommand());
+    driverController.RightTrigger().WhileTrue(m_shooter.GetShootCommand());
+    m_shooter.SetDefaultCommand(m_shooter.GetDefaultCommand());
 }
 
 frc2::CommandPtr&& GaryContainer::GetAutonomousCommand()
