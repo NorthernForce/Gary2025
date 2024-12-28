@@ -23,9 +23,14 @@ void GaryContainer::ConfigureBindings()
     m_drive.SetDefaultCommand(m_drive.GetDefaultCommand(
         TuneJoystickInput([&driverController]() { return -driverController.GetLeftY(); }),
         TuneJoystickInput([&driverController]() { return -driverController.GetRightX(); })));
-    driverController.LeftTrigger().WhileTrue(m_shooter.GetIntakeCommand());
-    driverController.RightTrigger().WhileTrue(m_shooter.GetShootCommand());
+    auto armSpeedSupplier = [&driverController]() { return driverController.GetRightY(); };
+    driverController.LeftTrigger().WhileTrue(m_intake.GetIntakeCommand(armSpeedSupplier)
+        .AlongWith(m_indexer.GetIndexCommand()));
+    driverController.RightBumper().WhileTrue(m_shooter.GetRampShooterCommand());
+    driverController.RightTrigger().WhileTrue(m_indexer.GetIndexCommand());
     m_shooter.SetDefaultCommand(m_shooter.GetDefaultCommand());
+    m_indexer.SetDefaultCommand(m_indexer.GetDefaultCommand());
+    m_intake.SetDefaultCommand(m_intake.GetDefaultCommand(armSpeedSupplier));
 }
 
 frc2::CommandPtr&& GaryContainer::GetAutonomousCommand()

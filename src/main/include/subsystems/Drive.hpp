@@ -21,5 +21,5 @@ public:
     frc2::CommandPtr&& GetDefaultCommand(DoubleSupplier forwardSupplier, DoubleSupplier rotationSupplier);
 private:
     std::shared_ptr<frc::DifferentialDrive> m_drive;
-    frc::PWMTalonSRX m_left_front, m_right_front, m_left_back, m_right_back;
+    frc::PWMTalonSRX m_left, m_right;
 };

@@ -12,14 +12,14 @@
 
 using DoubleSupplier = std::function<double()>;
 
-class Shooter : public frc2::SubsystemBase
+class Indexer : public frc2::SubsystemBase
 {
 public:
-    Shooter();
-    void RampShooter();
-    void StopShooter();
-    frc2::CommandPtr&& GetRampShooterCommand();
+    Indexer();
+    void RunIndexer();
+    void StopIndexer();
+    frc2::CommandPtr&& GetIndexCommand();
     frc2::CommandPtr&& GetDefaultCommand();
 private:
-    frc::PWMTalonSRX shooter;
+    frc::PWMTalonSRX indexer;
 };

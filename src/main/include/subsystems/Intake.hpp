@@ -12,14 +12,15 @@
 
 using DoubleSupplier = std::function<double()>;
 
-class Shooter : public frc2::SubsystemBase
+class Intake : public frc2::SubsystemBase
 {
 public:
-    Shooter();
-    void RampShooter();
-    void StopShooter();
-    frc2::CommandPtr&& GetRampShooterCommand();
-    frc2::CommandPtr&& GetDefaultCommand();
+    Intake();
+    void RunIntake();
+    void MoveArm(double speed);
+    void StopIntake();
+    frc2::CommandPtr&& GetIntakeCommand(DoubleSupplier armSpeedSupplier);
+    frc2::CommandPtr&& GetDefaultCommand(DoubleSupplier armSpeedSupplier);
 private:
-    frc::PWMTalonSRX shooter;
+    frc::PWMTalonSRX intake, arm;
 };
